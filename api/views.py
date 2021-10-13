@@ -15,6 +15,7 @@ def home(request):
 def upload_img(request):
     width = request.POST.get('width', 128)
     height = request.POST.get('height', 64)
-    img = request.FILES['damian']
-    b = convert(img, (width, height))
-    return JsonResponse({'data': b}, status=200)
+    image = request.FILES['file']
+    bytelist = convert(image, (width, height))
+
+    return JsonResponse({'payload': bytelist}, status=200)
