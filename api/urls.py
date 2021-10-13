@@ -5,5 +5,5 @@ from .views import home, upload_img
 
 urlpatterns = [
     path('', home, name='home'),
-    path('convert/', upload_img),
+    path('convert', upload_img),
 ]
