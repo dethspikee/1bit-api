@@ -16,9 +16,8 @@ def home(request):
 @require_POST
 @csrf_exempt
 def upload_img(request):
-    width = request.POST.get('width', 128)
-    height = request.POST.get('height', 64)
-
+    width = request.POST.get('width', '128')
+    height = request.POST.get('height', '64')
 
     try:
         image = request.FILES['file']
