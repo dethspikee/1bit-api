@@ -1,4 +1,4 @@
-from bottle import route, run, post, request, response, abort
+from bottle import run, post, request, abort
 
 from io import BytesIO
 from PIL import UnidentifiedImageError
