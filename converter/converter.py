@@ -27,12 +27,13 @@ def convert(base64image, threshold=None):
     bytelist = []
 
     for row in range(HEIGHT):
+        # Divide row of 128 pixels into 8 bit chunks
+        # In a row of 128 columns there is exactly 16 8-byte chunks so
+        # hardcoding '16' here instead of using arithmetic or variable
         for col in range(16):
             if threshold is not None:
                 arr[row][arr[row] == 255] = 1
             bits = ''.join(str(bit) for bit in arr[row][start:end])
-            if len(bits) != BYTE_SIZE:
-                bits += '0000'
             bits = hex(int(bits, 2))
             bytelist.append(bits)
             start = end
