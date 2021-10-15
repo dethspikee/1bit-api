@@ -3,6 +3,7 @@ from bottle import route, run, post, request, response, abort
 from io import BytesIO
 from PIL import UnidentifiedImageError
 import base64
+import os
 
 from converter import convert
 
@@ -23,4 +24,4 @@ def handle_conversion():
     return {'payload': bytelist}
 
 
-run(host='localhost', port=8000, debug=True, reloader=True)
+run(server='gunicorn', host='0.0.0.0', port=os.environ.get('PORT'))
