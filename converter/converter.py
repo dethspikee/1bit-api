@@ -64,5 +64,7 @@ def convert(base64image, threshold=None):
             end += 8
         start = 0
         end = 8
-    
+
+    img.close()
+
     return ','.join(bit for bit in bytelist)
