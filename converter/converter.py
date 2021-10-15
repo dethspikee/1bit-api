@@ -7,14 +7,15 @@ import base64
 
 
 @lru_cache(maxsize=512)
-def convert(base64image, size, threshold=None):
+def convert(base64image, threshold=None):
     BYTE_SIZE = 8
+    WIDTH = 128
+    HEIGHT = 64
     end = 8
     start = 0
 
     image = BytesIO(base64.b64decode(base64image))
-    width, height = int(size[0]), int(size[1])
-    img = Image.open(image).resize((width, height))
+    img = Image.open(image).resize((WIDTH, HEIGHT))
     if threshold is None:
         img = img.convert('1', dither=Image.NONE)
     else:
@@ -25,7 +26,7 @@ def convert(base64image, size, threshold=None):
 
     bytelist = []
 
-    for row in range(height):
+    for row in range(HEIGHT):
         for col in range(16):
             if threshold is not None:
                 arr[row][arr[row] == 255] = 1
