@@ -24,4 +24,4 @@ def handle_conversion():
     return {'payload': bytelist}
 
 
-run(server='gunicorn', host='0.0.0.0', port=os.environ.get('PORT'))
+run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get('PORT')))
