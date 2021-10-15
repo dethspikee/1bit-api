@@ -8,6 +8,30 @@ import base64
 
 @lru_cache(maxsize=512)
 def convert(base64image, threshold=None):
+    """
+    Decode image encoded as base64 then convert it to
+    1 bit bitmap. Iterate over newly created bitmap
+    converting each 8 bits (a byte) to hex. Store each hex
+    as string in the bytelist.
+    Optionaly 'threshold' parameter can be used to determine
+    point of conversion between white / black colors. In this
+    case original image is first converted to 8 bit bitmap and then
+    threshold value is applied during point conversion.
+    Return list of strings representing pixel values (as hex) of the bitmap.
+
+    Parameters
+    ----------
+    base64image : bytes
+        base64 encoded image
+
+    threshold : str
+        Value used to determine point of conversion between white / black
+        pixels
+
+    Returns
+    -------
+    List of str hex values encoding each pixel in the bitmap.
+    """
     BYTE_SIZE = 8
     WIDTH = 128
     HEIGHT = 64
