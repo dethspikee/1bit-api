@@ -24,8 +24,18 @@ def handle_conversion():
     return {'payload': bytelist}
 
 
+@post('/encode64')
+def encode_base64():
+    try:
+        image = request.files['file']
+        b64_image = base64.b64encode(image.file.read()).decode('ascii')
+    except KeyError:
+        abort(422, "'file' key not found. Please provide image file.")
+
+    return {'payload': b64_image}
+
+
 if os.environ.get('PROD'):
     run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get('PORT')))
 else:
     run(host='localhost', port=8080, debug=True, reloader=True)
-
