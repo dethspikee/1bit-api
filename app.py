@@ -5,6 +5,7 @@ from PIL import UnidentifiedImageError
 import base64
 import os
 
+from utils import create_response
 from converter import convert
 
 
@@ -17,9 +18,9 @@ def handle_conversion():
         b64_image = base64.b64encode(image.file.read())
         bytelist = convert(b64_image, threshold)
     except UnidentifiedImageError:
-        abort(422, 'Error processing file contents. Make sure you\'re sending valid image.')
+        return create_response('Error processing file contents. Make sure you\'re sending valid image', 422)
     except KeyError:
-        abort(422, "'file' key not found. Please provide image file.")
+        return create_response('missing file', 422)
 
     return {'payload': bytelist}
 
@@ -30,7 +31,7 @@ def encode_base64():
         image = request.files['file']
         b64_image = base64.b64encode(image.file.read()).decode('ascii')
     except KeyError:
-        abort(422, "'file' key not found. Please provide image file.")
+        return create_response('missing file', 422)
 
     return {'payload': b64_image}
 
