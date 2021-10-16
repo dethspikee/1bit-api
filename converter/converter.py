@@ -68,3 +68,18 @@ def convert(base64image, threshold=None):
     img.close()
 
     return ','.join(bit for bit in bytelist)
+
+
+def resize(image, size):
+    width, height = size
+    imgbuffer = BytesIO()
+
+    img = Image.open(image)
+    format = img.format
+    img = img.resize((width, height))
+    img.save(imgbuffer, format=format)
+    img.close()
+
+    print(imgbuffer.getvalue())
+
+    return imgbuffer.getvalue()
