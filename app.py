@@ -44,6 +44,8 @@ def resize_image():
 
     if not width.isnumeric() or int(width) <= 0:
         return create_response({'error': 'width must be a number and greater than 0'}, 422, 'application/json')
+    if not height.isnumeric() or int(height) <= 0:
+        return create_response({'error': 'height must be a number and greater than 0'}, 422, 'application/json')
 
     try:
         image = request.files['file']
