@@ -51,7 +51,7 @@ def resize_image():
         image = request.files['file']
         b64_image = resize(image.file, (int(width), int(height)))
     except KeyError:
-        return create_response('missing file', 422, 'application/json')
+        return create_response({'error': 'missing file'}, 422, 'application/json')
 
     return create_response(b64_image, 200, 'application/octet-stream')
 
