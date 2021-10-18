@@ -39,8 +39,11 @@ def encode_base64():
 
 @post('/resize')
 def resize_image():
-    width = request.params.get('width')
-    height = request.params.get('height')
+    width = request.params.get('width', '')
+    height = request.params.get('height', '')
+
+    if not width.isnumeric() or int(width) <= 0:
+        return create_response({'error': 'width must be a number and greater than 0'}, 422, 'application/json')
 
     try:
         image = request.files['file']
