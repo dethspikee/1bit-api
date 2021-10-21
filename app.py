@@ -26,7 +26,7 @@ def handle_conversion():
     return {'payload': bytelist}
 
 
-@post('/encode64')
+@post('/encode')
 def encode_base64():
     try:
         image = request.files['file']
